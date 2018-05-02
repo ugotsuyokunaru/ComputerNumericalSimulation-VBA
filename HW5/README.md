@@ -5,7 +5,7 @@
 以下為程式碼
 ---
 
-> ‵‵Option Explicit  ‵‵
+> ``Option Explicit``  
 > Sub 找質數()  
 > Dim i%, j%, p%, w As Integer  
 > Dim m As Long  
