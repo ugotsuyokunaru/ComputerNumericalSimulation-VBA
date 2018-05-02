@@ -6,10 +6,10 @@
 ---
 
 >Option Explicit
->Sub 找質數()
->Dim i%, j%, p%, w As Integer
->Dim m As Long
->
+Sub 找質數()
+Dim i%, j%, p%, w As Integer
+Dim m As Long
+
 >ActiveSheet.Cells.Clear
 >m = InputBox("請輸入您希望質數找到哪個數字？")
 >p = 2
