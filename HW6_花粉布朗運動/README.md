@@ -70,15 +70,13 @@ stTimer = Timer
 Loop Until d = 10
 
 End Sub
-
 ```
 
 ---
 
-### 算出這模擬共1000個顆粒跳動後的總平均位置、總平均距離、距離的方均根。
+> 算出這模擬共1000個顆粒跳動後的總平均位置、總平均距離、距離的方均根。
 
 ```VBA
-
 Option Explicit
 Sub radom_walk_relation()
 
@@ -137,15 +135,13 @@ x = x + 1
 Loop Until x > 90
 
 End Sub
-
 ```
 
 ---
 
-### 每次跳動有三種可能(向左、不動、向右)且機率軍相等，position平均一樣在0附近，但平均Abs_position從80左右下降到65左右。
+每次跳動有三種可能(向左、不動、向右)且機率軍相等，position平均一樣在0附近，但平均Abs_position從80左右下降到65左右。
 
 ```VBA
-
 Option Explicit
 Sub random_walk_1D2()
 Dim i&, j&, sum_position&, abs_sum_position&, sum_RSquare&, RBar&, d As Long
@@ -210,13 +206,12 @@ sum_RSquare = 0
  Loop Until d = 10
     
 End Sub
-
 ```
 
 ---
 
 # 二維布朗運動
-### 
+>  
 
 ```VBA
 
