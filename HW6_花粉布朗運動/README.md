@@ -139,7 +139,8 @@ End Sub
 
 ---
 
-每次跳動有三種可能(向左、不動、向右)且機率軍相等，position平均一樣在0附近，但平均Abs_position從80左右下降到65左右。
+> 每次跳動有三種可能(向左、不動、向右)且機率軍相等，position平均一樣在0附近，  
+> 但平均Abs_position從80左右下降到65左右。
 
 ```VBA
 Option Explicit
@@ -211,9 +212,189 @@ End Sub
 ---
 
 # 二維布朗運動
->  
+> 將這十次模擬(每次有1000顆)的平均結果列表，包括
+> 1. 模擬序數、
+> 2. 跳一萬次後與原點之平均距離(絕對值)、
+> 3. 與原點之平均方位(角度)、
+> 4. x座標、
+> 5. y座標、 
+> 6. 和跑程式時間
+> 等六項。
 
 ```VBA
+Option Explicit
+Sub randomwalk_2D()
+Dim i&, j&, x%
+Dim sum_posx&, sum_posy&, sum_angle!
+Dim avg_posx!, avg_posy!, avg_angle!, avg_distance!
+Dim posx&(1 To 1000), posy&(1 To 1000), angle!(1 To 1000)
+Dim pi!, time!
 
+x = 0
+Do
+time = Timer
+
+pi = 3.1415926
+
+ReDim pos(10000)
+RandomizeX
+For i = 1 To 1000
+    posx(i) = 0
+    posy(i) = 0
+        For j = 1 To 10000
+            pos(j) = 2 * pi * RndX
+            posx(i) = posx(i) + Cos(pos(j))
+            posy(i) = posy(i) + Sin(pos(j))
+        Next j
+        
+        If posx(i) > 0 And posy(i) >= 0 Then
+        angle(i) = Atn(posy(i) / posx(i)) * 180 / pi
+        
+        ElseIf posx(i) < 0 And posy(i) >= 0 Then
+        angle(i) = Atn(posy(i) / posx(i)) * 180 / pi + 180
+        
+        ElseIf posx(i) < 0 And posy(i) < 0 Then
+        angle(i) = Atn(posy(i) / posx(i)) * 180 / pi + 180
+        
+        ElseIf posx(i) > 0 And posy(i) < 0 Then
+        angle(i) = Atn(posy(i) / posx(i)) * 180 / pi + 360
+        
+        ElseIf posx(i) = 0 And posy(i) > 0 Then
+        angle(i) = 90
+        
+        ElseIf posx(i) = 0 And posy(i) < 0 Then
+        angle(i) = 270
+        
+       End If
+Next i
+    
+    
+    sum_posx = 0
+    sum_posy = 0
+    sum_angle = 0
+    
+For i = 1 To 1000
+        
+sum_posx = sum_posx + posx(i)
+sum_posy = sum_posy + posy(i)
+sum_angle = sum_angle + angle(i)
+
+Next i
+    
+    avg_posx = sum_posx / 1000
+    avg_posy = sum_posy / 1000
+    avg_angle = sum_angle / 1000
+    avg_distance = Sqr(avg_posx ^ 2 + avg_posy ^ 2)
+    
+    ActiveWorkbook.Worksheets("第三頁").Select
+    ActiveSheet.Cells(3, 2 + x * 7).Value = "序號"
+    ActiveSheet.Cells(3, 3 + x * 7).Value = "x座標"
+    ActiveSheet.Cells(3, 4 + x * 7).Value = "y座標"
+    ActiveSheet.Cells(3, 5 + x * 7).Value = "方位"
+    ActiveSheet.Cells(3, 6 + x * 7).Value = "平均距離"
+    ActiveSheet.Cells(3, 7 + x * 7).Value = "平均方位"
+
+For i = 4 To 1003
+        ActiveSheet.Cells(i, 2 + x * 7) = i - 3
+        ActiveSheet.Cells(i, 3 + x * 7) = posx(i - 3)
+        ActiveSheet.Cells(i, 4 + x * 7) = posy(i - 3)
+        ActiveSheet.Cells(i, 5 + x * 7) = angle(i - 3)
+        
+Next i
+    
+    ActiveSheet.Cells(4, 6 + x * 7) = avg_distance
+    ActiveSheet.Cells(4, 7 + x * 7) = avg_angle
+    ActiveSheet.Cells(2, 2 + x * 7).Value = "執行第" & Str(x + 1) & "次，執行時間" & Timer - time & "秒"
+
+x = x + 1
+Loop Until x >= 10
+End Sub
 ```
+
+---
+
+> 分析平均距離、平均方位角這兩個值，與跳動次數的關係，
+> 發現平均距離皆位於0左右，平均方位角則在180左右。
+
+```VBA
+Option Explicit
+Sub random_walk_relation()
+Dim i&, j&, x%
+Dim sum_posx&, sum_posy&, sum_angle!, sum_distance!
+Dim avg_posx!, avg_posy!, avg_angle!, avg_distance!
+Dim posx&(1 To 1000), posy&(1 To 1000), angle!(1 To 1000)
+Dim pi!, time!, k!
+x = 0
+Do
+time = Timer
+pi = 3.14159
+
+ReDim pos(10000)
+RandomizeX
+For i = 1 To 1000
+    posx(i) = 0
+    posy(i) = 0
+        For j = 1 To 1000 + x * 100
+            pos(j) = 2 * pi * RndX
+            posx(i) = posx(i) + Cos(pos(j))
+            posy(i) = posy(i) + Sin(pos(j))
+        Next j
+        If posx(i) > 0 And posy(i) >= 0 Then
+        angle(i) = Atn(posy(i) / posx(i)) * 180 / pi
+        
+        ElseIf posx(i) < 0 And posy(i) >= 0 Then
+        angle(i) = Atn(posy(i) / posx(i)) * 180 / pi + 180
+        
+        ElseIf posx(i) < 0 And posy(i) < 0 Then
+        angle(i) = Atn(posy(i) / posx(i)) * 180 / pi + 180
+        
+        ElseIf posx(i) > 0 And posy(i) < 0 Then
+        angle(i) = Atn(posy(i) / posx(i)) * 180 / pi + 360
+        
+        ElseIf posx(i) = 0 And posy(i) > 0 Then
+        angle(i) = 90
+        
+        ElseIf posx(i) = 0 And posy(i) < 0 Then
+        angle(i) = 270
+        
+        End If
+Next i
+
+    sum_posx = 0
+    sum_posy = 0
+    sum_angle = 0
+    sum_distance = 0
+    
+For i = 1 To 1000
+        
+sum_posx = sum_posx + posx(i)
+sum_posy = sum_posy + posy(i)
+sum_angle = sum_angle + angle(i)
+sum_distance = sum_distance + (posx(i) ^ 2 + posy(i) ^ 2)
+Next i
+    
+    avg_posx = sum_posx / 1000
+    avg_posy = sum_posy / 1000
+    avg_distance = Sqr(avg_posx ^ 2 + avg_posy ^ 2)
+    avg_angle = sum_angle / 1000
+    k = Sqr(sum_distance / 1000)
+    
+ActiveWorkbook.Worksheets("工作表2").Select
+    ActiveSheet.Cells(3, 2).Value = "跳動次數"
+    ActiveSheet.Cells(3, 3).Value = "平均距離"
+    ActiveSheet.Cells(3, 4).Value = "平均方位角"
+    ActiveSheet.Cells(3, 5).Value = "距離方均根"
+    ActiveSheet.Cells(3, 6).Value = "執行時間"
+       
+    ActiveSheet.Cells(x + 4, 2) = 1000 + x * 100
+    ActiveSheet.Cells(x + 4, 3) = avg_distance
+    ActiveSheet.Cells(x + 4, 4) = avg_angle
+    ActiveSheet.Cells(x + 4, 5) = k
+    ActiveSheet.Cells(x + 4, 6) = Timer - time
+    x = x + 1
+    Loop Until x > 90
+End Sub
+```
+
+---
 
