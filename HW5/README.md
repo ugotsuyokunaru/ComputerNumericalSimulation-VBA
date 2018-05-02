@@ -15,7 +15,7 @@
 >p = 2  
 >  
 >For i = 2 To m  
->    \w = 0  
+>    \\\w = 0\\\  
 >      
 >    \For j = 2 To (i - 1)  
 >        \If i Mod j = 0 Then  
