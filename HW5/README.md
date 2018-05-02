@@ -15,15 +15,15 @@
 >p = 2  
 >  
 >For i = 2 To m  
->    \\\w = 0  
+>    \w = 0  
 >      
->    For j = 2 To (i - 1)  
->        If i Mod j = 0 Then  
->        w = 1  
->        End If  
->    Next j  
+>    \For j = 2 To (i - 1)  
+>        \If i Mod j = 0 Then  
+>        \w = 1  
+>        \End If  
+>    \Next j  
 >      
->    If w = 0 Then  
->        ActiveSheet.Cells(p, 2).Value = i  
->        p = p + 1  
->    End If  
+>    \If w = 0 Then  
+>        \ActiveSheet.Cells(p, 2).Value = i  
+>        \p = p + 1  
+>    \End If  
