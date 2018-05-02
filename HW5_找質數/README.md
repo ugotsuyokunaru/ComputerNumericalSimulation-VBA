@@ -2,10 +2,11 @@
 請打開excel >> 點選開發人員 >> 點選Visual Basic >> 觀看程式碼
 
 ---
-以下為程式碼
+以下為程式碼：
+
 ---
 
-```
+```VBA
 Option Explicit  
 Sub 找質數()  
 Dim i%, j%, p%, w As Integer  
