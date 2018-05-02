@@ -5,7 +5,7 @@
 以下為程式碼
 ---
 
-> Option Explicit  
+> `Option Explicit  
 > Sub 找質數()  
 > Dim i%, j%, p%, w As Integer  
 > Dim m As Long  
@@ -26,4 +26,4 @@
 >       If w = 0 Then  
 >           ActiveSheet.Cells(p, 2).Value = i  
 >           p = p + 1  
->       End If  
+>       End If  `
