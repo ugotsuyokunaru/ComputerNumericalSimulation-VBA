@@ -34,7 +34,7 @@ pos(x + 53 + (Int((x - 1) / 50)) * 2) .Interior.ColorIndex = 7
 Set pos = Range(“C3:BB54”)
 ```  
 
-![Image of illustration](.\illustration.png)
+![Image of illustration](/illustration.png)
 
 2. 直接用Range的儲存格顏色判斷。  
 ```VBA
