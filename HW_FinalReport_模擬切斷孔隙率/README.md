@@ -26,11 +26,11 @@
 ### 模擬策略重點：  
 1. 定義一變數 pos 為 Range， 
 > Set pos = Range(“C3:BB54”)
-![Image of illustration](/illustration.png)
+![Image of illustration](illustration.png)
 2. 直接用Range的儲存格顏色判斷。  
 > pos.Cells(i).Interior.ColorIndex
 3. 把50x50的二維格子，一維化處理，且使用自創公式
-> x + 53 + (Int((x - 1) / 50)) * 2)
+> x + 53 + (Int((x - 1) / 50)) * 2)  
 將1/2500隨機選到的格子，轉成52x52的range中的中央50x50部分。  
 4. 使用stack陣列來記錄需要被染水但未染的格子。(stack判斷邏輯在下面詳述。)  
   
