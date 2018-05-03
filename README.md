@@ -1,4 +1,5 @@
-# 電腦數值模擬導論 Computer Numerical Simulation (coding by `Excel-VBA` )  
+# 電腦數值模擬導論 Computer Numerical Simulation  
+(coding by `Excel-VBA` )  
 
 ---
 
