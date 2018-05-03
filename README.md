@@ -3,6 +3,12 @@
 
 ---
 
+> 資料夾內皆有各模擬的 README 檔案，簡介各模擬的目的與成果圖表呈現，  
+> 也有放 VBA code 在 README 中，並附上 啟用巨集的 Excel 檔案，可進入檢視詳細成果與 code 
+> 
+
+---
+
 ### [HW05_找質數](https://github.com/ugotsuyokunaru/ComputerNumericalSimulation-VBA/tree/master/HW05_%E6%89%BE%E8%B3%AA%E6%95%B8)
 
 ### [HW06_花粉布朗運動](https://github.com/ugotsuyokunaru/ComputerNumericalSimulation-VBA/tree/master/HW06_%E8%8A%B1%E7%B2%89%E5%B8%83%E6%9C%97%E9%81%8B%E5%8B%95)
