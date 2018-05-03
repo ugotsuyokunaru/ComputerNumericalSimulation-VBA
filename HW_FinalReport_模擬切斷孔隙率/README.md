@@ -265,6 +265,7 @@ ActiveSheet.Cells(103, "BG") = n3 / 100
 > 跑程式時間：1.56秒  
 
 另有上台報告的版本(視覺化，把水龍頭設成巨集觸發，按下即可重跑一次隨機切孔，並計算切斷孔隙率)：  
-![Image of illustration](demo.png)  
+
+![Image of demo](demo.png)  
 
 
