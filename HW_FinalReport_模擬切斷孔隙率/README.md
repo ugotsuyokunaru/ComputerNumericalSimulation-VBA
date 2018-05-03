@@ -11,42 +11,26 @@
 1. 滲透方向為由上到下  
 2. 用 *隨機拔格子概念* 來移 *除格子點* (初始皆為灰色，拔掉後變成無顏色)  
 3. 每次隨機拔格子皆為1/2500的機率  
-```VBA
-x = Int(RndX * 2500) + 1)
-```  
-
+> x = Int(RndX * 2500) + 1) 
 4. 用If判斷來解決拔到重覆的格子問題
-```VBA
-If pos(x + 53 + (Int((x - 1) / 50)) * 2).Interior.ColorIndex = 16 
-``` 
-Then……，  
+> If pos(x + 53 + (Int((x - 1) / 50)) * 2).Interior.ColorIndex = 16 
+> Then……，  
     即若拔到的格子是原始的灰色，才往下執行，否則直接跳出，拔下個格子)  
 5. 判斷流通的方式為：每做完一組全部的stack後，使變數 water = 0 後，用 For 迴圈包 If 判斷，最底下那排  
     之中，只要有任何一格有染到水，就讓 water = 1，跳出迴圈後，最外層的 Do Loop 就 Loop until water = 1 即代表已流通。  
 6. 判斷最後一個拔的格子點的方式：在判定最底下那排完後，如果 water = 1，就使  
-```VBA
-pos(x + 53 + (Int((x - 1) / 50)) * 2) .Interior.ColorIndex = 7
-``` 
+> pos(x + 53 + (Int((x - 1) / 50)) * 2) .Interior.ColorIndex = 7
 (因為還未離開Do loop迴圈，那次的x值沒變)。  
   
 
 ### 模擬策略重點：  
 1. 定義一變數 pos 為 Range， 
-```VBA
-Set pos = Range(“C3:BB54”)
-```  
-
+> Set pos = Range(“C3:BB54”)
 ![Image of illustration](/illustration.png)
-
 2. 直接用Range的儲存格顏色判斷。  
-```VBA
-pos.Cells(i).Interior.ColorIndex
-```
-  
+> pos.Cells(i).Interior.ColorIndex
 3. 把50x50的二維格子，一維化處理，且使用自創公式
-```VBA
-x + 53 + (Int((x - 1) / 50)) * 2)
-```
+> x + 53 + (Int((x - 1) / 50)) * 2)
 將1/2500隨機選到的格子，轉成52x52的range中的中央50x50部分。  
 4. 使用stack陣列來記錄需要被染水但未染的格子。(stack判斷邏輯在下面詳述。)  
   
